@@ -1,0 +1,26 @@
+[
+  {
+    "category" : 0,
+    "item" : 0,
+    "unit" : 0,
+    "value" : 5
+  },
+  {
+    "category" : 1,
+    "item" : 4,
+    "unit" : 7,
+    "value" : 6
+  },
+  {
+    "category" : 2,
+    "item" : 13,
+    "unit" : 2,
+    "value" : 4
+  },
+  {
+    "category" : 3,
+    "item" : 19,
+    "unit" : 9,
+    "value" : 10
+  }
+]

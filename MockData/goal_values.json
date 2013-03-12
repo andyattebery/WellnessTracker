@@ -1,0 +1,150 @@
+[
+	{ 	
+    "id" : 0,
+    "name" : "Fitness",
+    "items" : [
+      {
+        "id" : 0,
+        "name" : "Exercise",
+        "type" : "target",
+        "unit" : [ 0 ]
+      },
+			{
+        "id" : 1,
+        "name" : "Running",
+        "type" : "target",
+        "unit" : [ 0, 3 ]
+      },
+			{ 
+        "id" : 2,
+        "name" : "Walking",
+        "type" : "target",
+        "unit" : [ 0, 3, 4 ]
+      },
+			{ 
+        "id" : 3,
+        "name" : "Standing Desk Use",
+        "type" : "target",
+        "unit" : [ 1 ]
+      },
+			{ 
+        "id" : 4,
+        "name" : "Weight Loss",
+        "type" : "target",
+        "unit" : [ 5 ]
+      }
+		]
+  },
+	{ 	
+    "id" : 1,
+    "name" : "Nutrition",
+    "items" : [
+      {
+        "id" : 4,
+        "name" : "Alcohol",
+        "type" : "min",
+        "unit" : [ 7 ]
+      },
+			{ 
+        "id" : 5,
+        "name" : "Caffeine",
+        "type" : "min",
+        "unit" : [ 7 ]
+      },
+			{ 
+        "id" : 6,
+        "name" : "Calories",
+        "type" : "min",
+        "unit" : [ 9 ]
+      },
+			{ 
+        "id" : 7,
+        "name" : "Carbs",
+        "type" : "min",
+        "unit" : [ 9 ]
+      },
+			{ 
+        "id" : 8,
+        "name" : "Cigarettes",
+        "type" : "min",
+        "unit" : [ 9 ]
+      },
+			{ 
+        "id" : 9,
+        "name" : "Sweets",
+        "type" : "min",
+        "unit" : [ 8 ]
+      },
+			{ 
+        "id" : 10,
+        "name" : "Vegetables",
+        "type" : "max",
+        "unit" : [ 8 ]
+      },
+			{ 
+        "id" : 11,
+        "name" : "Vitamins",
+        "type" : "max",
+        "unit" : [ 2 ]
+      },
+			{ 
+        "id" : 12,
+        "name" : "Water",
+        "type" : "max",
+        "unit" : [ 7 ]
+      }
+		]
+  },
+	{ 	
+    "id" : 2,
+    "name" : "Rest and Wellness",
+    "items" : [
+      {
+        "id" : 13,
+        "name" : "Six Hours of Sleep",
+        "type" : "target",
+        "unit" : [ 2 ]
+      },
+			{
+        "id" : 14,
+        "name" : "Consistent Bedtime",
+        "type" : "target",
+        "unit" : [ 2 ]
+      },
+			{
+        "id" : 15,
+        "name" : "Devices Off One Hour Before Bed",
+        "type" : "target",
+        "unit" : [ 2 ]
+      },
+			{
+        "id" : 16,
+        "name" : "Meditation",
+        "type" : "target",
+        "unit" : [ 0 ]
+      },
+			{
+        "id" : 17,
+        "name" : "Sleep",
+        "type" : "target",
+        "unit" : [ 1 ]
+      },
+			{
+        "id" : 18,
+        "name" : "Stretching",
+        "type" : "target",
+        "unit" : [ 2 ]
+      }
+		]
+  },
+	{ 	
+    "id" : 3,
+    "name" : "Custom",
+    "items" : [
+      { 
+        "name" : "Custom",
+        "unit" : [ ]
+      }
+		]
+  }
+]
