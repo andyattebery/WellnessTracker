@@ -6,31 +6,31 @@
       {
         "id" : 0,
         "name" : "Exercise",
-        "type" : "target",
+        "type" : "equal",
         "unit" : [ 0 ]
       },
 			{
         "id" : 1,
         "name" : "Running",
-        "type" : "target",
+        "type" : "equal",
         "unit" : [ 0, 3 ]
       },
 			{ 
         "id" : 2,
         "name" : "Walking",
-        "type" : "target",
+        "type" : "equal",
         "unit" : [ 0, 3, 4 ]
       },
 			{ 
         "id" : 3,
         "name" : "Standing Desk Use",
-        "type" : "target",
+        "type" : "equal",
         "unit" : [ 1 ]
       },
 			{ 
         "id" : 4,
         "name" : "Weight Loss",
-        "type" : "target",
+        "type" : "equal",
         "unit" : [ 5 ]
       }
 		]
@@ -42,55 +42,55 @@
       {
         "id" : 4,
         "name" : "Alcohol",
-        "type" : "min",
+        "type" : "less",
         "unit" : [ 7 ]
       },
 			{ 
         "id" : 5,
         "name" : "Caffeine",
-        "type" : "min",
+        "type" : "less",
         "unit" : [ 7 ]
       },
 			{ 
         "id" : 6,
         "name" : "Calories",
-        "type" : "min",
+        "type" : "less",
         "unit" : [ 9 ]
       },
 			{ 
         "id" : 7,
         "name" : "Carbs",
-        "type" : "min",
+        "type" : "less",
         "unit" : [ 9 ]
       },
 			{ 
         "id" : 8,
         "name" : "Cigarettes",
-        "type" : "min",
+        "type" : "less",
         "unit" : [ 9 ]
       },
 			{ 
         "id" : 9,
         "name" : "Sweets",
-        "type" : "min",
+        "type" : "less",
         "unit" : [ 8 ]
       },
 			{ 
         "id" : 10,
         "name" : "Vegetables",
-        "type" : "max",
+        "type" : "greater",
         "unit" : [ 8 ]
       },
 			{ 
         "id" : 11,
-        "name" : "Vitamins",
-        "type" : "max",
+        "name" : "Vitalesss",
+        "type" : "greater",
         "unit" : [ 2 ]
       },
 			{ 
         "id" : 12,
         "name" : "Water",
-        "type" : "max",
+        "type" : "greater",
         "unit" : [ 7 ]
       }
 		]
@@ -102,37 +102,37 @@
       {
         "id" : 13,
         "name" : "Six Hours of Sleep",
-        "type" : "target",
+        "type" : "equal",
         "unit" : [ 2 ]
       },
 			{
         "id" : 14,
         "name" : "Consistent Bedtime",
-        "type" : "target",
+        "type" : "equal",
         "unit" : [ 2 ]
       },
 			{
         "id" : 15,
         "name" : "Devices Off One Hour Before Bed",
-        "type" : "target",
+        "type" : "equal",
         "unit" : [ 2 ]
       },
 			{
         "id" : 16,
         "name" : "Meditation",
-        "type" : "target",
+        "type" : "equal",
         "unit" : [ 0 ]
       },
 			{
         "id" : 17,
         "name" : "Sleep",
-        "type" : "target",
+        "type" : "equal",
         "unit" : [ 1 ]
       },
 			{
         "id" : 18,
         "name" : "Stretching",
-        "type" : "target",
+        "type" : "equal",
         "unit" : [ 2 ]
       }
 		]
