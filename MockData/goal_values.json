@@ -136,15 +136,5 @@
         "unit" : [ 2 ]
       }
 		]
-  },
-	{ 	
-    "id" : 3,
-    "name" : "Custom",
-    "items" : [
-      { 
-        "name" : "Custom",
-        "unit" : [ ]
-      }
-		]
   }
 ]
