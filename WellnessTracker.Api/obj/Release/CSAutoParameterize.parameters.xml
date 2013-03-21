@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="DefaultConnection-Web.config Connection String" description="DefaultConnection Connection String used in web.config by the application to access the database." defaultValue="Data Source=(LocalDb)\v11.0;Initial Catalog=aspnet-WellnessTracker.Api-20130312204055;Integrated Security=SSPI;AttachDBFilename=|DataDirectory|\aspnet-WellnessTracker.Api-20130312204055.mdf" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\aattebery\\Projects\\Wellness\ Tracker\\Main\\WellnessTracker\\WellnessTracker\.Api\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+  <parameter name="GoalContext-Web.config Connection String" description="GoalContext Connection String used in web.config by the application to access the database." defaultValue="Data Source=(localdb)\v11.0; Initial Catalog=GoalContext-20130312220627; Integrated Security=True; MultipleActiveResultSets=True; AttachDbFilename=|DataDirectory|GoalContext-20130312220627.mdf" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\aattebery\\Projects\\Wellness\ Tracker\\Main\\WellnessTracker\\WellnessTracker\.Api\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='GoalContext']/@connectionString" />
+  </parameter>
+  <parameter name="GoalContext_DatabasePublish-Web.config Connection String" description="GoalContext_DatabasePublish Connection String used in web.config by the application to access the database." defaultValue="GoalContext_DatabasePublish.ConnetionString" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\aattebery\\Projects\\Wellness\ Tracker\\Main\\WellnessTracker\\WellnessTracker\.Api\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='GoalContext_DatabasePublish']/@connectionString" />
+  </parameter>
+</parameters>
