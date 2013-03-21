@@ -1391,7 +1391,7 @@ Array.prototype.last = [].last || function() {
     },
     
     _getPrefix: function() {
-      if (!this.path) {
+      if (!this.path && this.path !== '') {
         throw { type: 'Configuration Error', message: 'Missing base url' };
       }
       return (this.path || '') + this.getPrefix();
@@ -1413,11 +1413,13 @@ Array.prototype.last = [].last || function() {
             failure.call(context);
             return;
           }
-          try {
-            data = JSON.parse(data);
-          } catch(e) {
-            failure.call(context);
-            return;
+          if (typeof data === 'string') {
+            try {
+              data = JSON.parse(data);
+            } catch(e) {
+              failure.call(context);
+              return;
+            }
           }
           var clean;
           try {
