@@ -54,7 +54,8 @@ Clementine.add('wt-models', function(exports) {
 
     transformModelFromService: function(model) {
       
-    },
+    }
+    
   };
 
   /**

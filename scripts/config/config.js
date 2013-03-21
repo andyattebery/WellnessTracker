@@ -8,9 +8,10 @@ Clementine.config({
   name: 'wt',
   paths: {
     DEV: 'http://localhost/wellness/WellnessTracker/',
+    STAGE: '',
     PROD: 'http://wmpwellnesstracker.azurewebsites.net/api/'
   },
-  env: 'DEV',
+  env: 'STAGE',
   auth: '',
   services: ['goals'],
   views: [
