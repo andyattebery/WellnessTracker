@@ -502,7 +502,7 @@ Clementine.add('wt-controllers', function(exports) {
     },
 
     $onSubmitGoal: function() {
-      this.fire('set-title', 'Set Your Goals');
+      this.fire('set-title', 'Set Your Goals :(');
       // get value from text boxes and call service
       var params = {};
       params.value = this.find('.amount-textbox').val();
