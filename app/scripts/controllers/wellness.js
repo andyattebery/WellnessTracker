@@ -1,14 +1,25 @@
-Clementine.add('wt.controllers.wellness', function(exports) {
+Clementine.add('wt.controllers', function(exports) {
 
-  var ViewController = Clementine.ViewController;
-  var NavigationController = include('ui').NavigationController;
-  var ItemListController = include('wt.controllers.list').ItemListController;
+  var ViewController        = Clementine.ViewController;
+  
+  var NavigationController  = include('ui').NavigationController;
+  
+  var WellnessViewModel     = include('wt.models').WellnessViewModel;
+  var LoginViewModel        = include('wt.models').LoginViewModel;
 
   /**
    @class WellnessController
    @extends NavigationController
   */
   var WellnessController = NavigationController.extend({
+    
+    initialize: function(parent, target, app) {
+
+      this.model = new WellnessViewModel(app.getService('wt'));
+    
+      this._super(parent, target, app);
+    
+    },
     
     // Configuration
     
@@ -40,6 +51,16 @@ Clementine.add('wt.controllers.wellness', function(exports) {
    @fires login
   */
   var LoginController = ViewController.extend({
+  
+    initialize: function(parent, target, app) {
+
+      this.model = new LoginViewModel(app.getService('wt'));
+    
+      this._super(parent, target, app);
+    
+    },
+  
+    // Configuration
   
     getType: function() {
       return 'login';
@@ -74,6 +95,14 @@ Clementine.add('wt.controllers.wellness', function(exports) {
   */
   var GoalsController = ViewController.extend({
     
+    initialize: function(parent, target, app) {
+    
+      this.model = new GoalsViewModel(app.getService('wt'));
+    
+      this._super(parent, target, app);
+    
+    },
+    
     getType: function() {
       return 'goals';
     },
@@ -91,7 +120,7 @@ Clementine.add('wt.controllers.wellness', function(exports) {
     },
     
     setup: function() {
-      this.addView(ConfirmOverlayController, 'goal-setup', 'goal-setup', 'goal-setup.html', 'body');
+      this.addView(GoalSetupController, 'goal-setup', 'goal-setup', 'goal-setup.html', 'body');
     },
     
     // Event Listeners
@@ -156,7 +185,7 @@ Clementine.add('wt.controllers.wellness', function(exports) {
    @extends ItemListController
    @fires close, select
   */
-  var GoalChooserController = ItemListController.extend({
+  var GoalChooserController = ViewController.extend({
     
     getType: function() {
       return 'goal-chooser';
@@ -168,11 +197,30 @@ Clementine.add('wt.controllers.wellness', function(exports) {
     
     getBindings: function() {
       return {
-        'close-btn': this.$onClose
+        'close-btn': this.$onClose,
+        'list(li)': this.$onSelect
       };
     },
     
+    // Public Methods
+    
+    setData: function(data) {
+      this.data = data;
+    },
+    
+    render: function() {
+    
+    },
+    
+    clear: function() {
+    
+    },
+    
     // DOM Listeners
+    
+    $onSelect: function(e) {
+      e.stopPropagation();
+    },
     
     $onClose: function(e) {
       e.stopPropagation();
@@ -192,7 +240,7 @@ Clementine.add('wt.controllers.wellness', function(exports) {
     },
     
     getOutlets: function() {
-      return ['back-btn', 'custom-field', 'target-field', 'unit-field', 'custom-unit-field', 'value-field', 'save-btn'];
+      return ['back-btn', 'goal-name', 'goal-category', 'custom-field', 'unit-field', 'custom-unit-field', 'value-field', 'save-btn'];
     },
     
     getBindings: function(e) {

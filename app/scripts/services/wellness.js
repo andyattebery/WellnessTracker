@@ -5,7 +5,7 @@ Clementine.add('wt.services', function(exports) {
   var WellnessService = Clementine.Service.extend({
   
     getType: function() {
-      return 'wellness';
+      return 'wt';
     },
     
     getPrefix: function() {

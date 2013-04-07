@@ -13,9 +13,9 @@ Clementine.config({
     PROD: 'http://localhost:8000'
   },
   env: 'DEV',
-  services: [],
-  views: [],
-  required: ['wt.objects', 'wt.services', 'wt.controllers.wellness']
+  services: ['wt'],
+  views: ['login.html', 'goals.html', 'goal-setup.html'],
+  required: ['wt.objects', 'wt.services', 'wt.controllers']
 });
 
 var Browser = {
