@@ -216,9 +216,9 @@ Clementine.add('wt.controllers.wellness', function(exports) {
   
   exports.WellnessController    = WellnessController;
   exports.LoginController       = LoginController;
-  exports.GoalsController        = GoalsController;
+  exports.GoalsController       = GoalsController;
   exports.GoalSetupController   = GoalSetupController;
   exports.GoalChooserController = GoalChooserController;
   exports.GoalEditorController  = GoalEditorController;
 
-}, ['ui']);
+}, ['ui', 'wt.controllers.list']);
