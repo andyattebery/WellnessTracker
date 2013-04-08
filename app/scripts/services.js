@@ -20,12 +20,8 @@ Clementine.add('wt.services', function(exports) {
     },
     
     loginUser: function(email) {
-            
-      var params = {
-        email: email
-      };
       
-      return this.deferRequest('/User', 'POST', params, null);
+      return this.deferRequest('/User?email=' + encodeURI(email), 'POST', {}, null);
       
     },
     

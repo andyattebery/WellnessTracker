@@ -33,7 +33,7 @@ ul {
 
 .login-form {
   height: 100%;
-  padding: 15px;
+  padding: 25px;
   width: 100%;
 }
 
@@ -41,6 +41,15 @@ ul {
   height: 36px;
   padding: 8px 10px;
   width: 100%;
+}
+
+@media screen and (min-width: 420px) {
+
+  .login-form {
+    margin: 0 auto;
+    width: 350px;
+  }
+
 }
 
 #logo {
