@@ -95,11 +95,11 @@ Clementine.add('wt.services', function(exports) {
       if (categoryId == 3) {
         
         deferred.resolve([
-          new Goal({ Id: 1, Name: 'Running', Category: { Id: 3, Name: 'Wellness' }, Target: { Id: 1, Name: 'less' }, ValidUnits: [{ Id: 1, Name: 'Day' },  { Id: 2, Name: 'Pounds' }] }),
-          new Goal({ Id: 2, Name: 'Walking', Category: { Id: 3, Name: 'Wellness' }, Target: { Id: 2, Name: 'more' }, ValidUnits: [{ Id: 1, Name: 'Day' },  { Id: 2, Name: 'Pounds' }] }),
-          new Goal({ Id: 3, Name: 'Jumping', Category: { Id: 3, Name: 'Wellness' }, Target: { Id: 2, Name: 'more' }, ValidUnits: [{ Id: 1, Name: 'Day' },  { Id: 2, Name: 'Pounds' }] }),
-          new Goal({ Id: 4, Name: 'Eating', Category: { Id: 3, Name: 'Wellness' }, Target: { Id: 2, Name: 'less' }, ValidUnits: [{ Id: 1, Name: 'Day' },  { Id: 2, Name: 'Pounds' }] }),
-          new Goal({ Id: 5, Name: 'Sleeping', Category: { Id: 3, Name: 'Wellness' }, Target: { Id: 2, Name: 'more' }, ValidUnits: [{ Id: 1, Name: 'Day' },  { Id: 2, Name: 'Pounds' }] })
+          new Goal({ Id: 1, Name: 'Running', Category: { Id: 3, Name: 'Wellness' }, Target: { Id: 1, Name: 'less' }, ValidUnits: [{ Unit: { Id: 1, Name: 'Day' }, Id: 1 }, { Unit: { Id: 2, Name: 'Pounds' }, Id: 2 }] }),
+          new Goal({ Id: 2, Name: 'Walking', Category: { Id: 3, Name: 'Wellness' }, Target: { Id: 2, Name: 'more' }, ValidUnits: [{ Unit: { Id: 1, Name: 'Day' }, Id: 1 }, { Unit: { Id: 2, Name: 'Pounds' }, Id: 2 }] }),
+          new Goal({ Id: 3, Name: 'Jumping', Category: { Id: 3, Name: 'Wellness' }, Target: { Id: 2, Name: 'more' }, ValidUnits: [{ Unit: { Id: 1, Name: 'Day' }, Id: 1 }, { Unit: { Id: 2, Name: 'Pounds' }, Id: 2 }] }),
+          new Goal({ Id: 4, Name: 'Eating', Category: { Id: 3, Name: 'Wellness' }, Target: { Id: 2, Name: 'less' }, ValidUnits: [{ Unit: { Id: 1, Name: 'Day' }, Id: 1 }, { Unit: { Id: 2, Name: 'Pounds' }, Id: 2 }] }),
+          new Goal({ Id: 5, Name: 'Sleeping', Category: { Id: 3, Name: 'Wellness' }, Target: { Id: 2, Name: 'more' }, ValidUnits: [{ Unit: { Id: 1, Name: 'Day' }, Id: 1 }, { Unit: { Id: 2, Name: 'Pounds' }, Id: 2 }] })
         ]);
         
       } else {

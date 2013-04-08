@@ -72,7 +72,7 @@ Clementine.add('wt.objects', function(exports) {
     this.target = new Target(data.Target);
     this.sortField = this.target.name;
     this.validUnits = _.map(data.ValidUnits, function(validUnit) {
-      return new Unit(validUnit);
+      return new Unit(validUnit.Unit);
     });
     
   }
