@@ -32,9 +32,9 @@ Clementine.add('wt.controllers', function(exports) {
     onLogin: function(e) {      
       e.stopPropagation();
       var that = this;
-      this.getView('goals').setUserId(e.data).then(function() {
+      this.getView('goals').setUserId(e.data).done(function() {
         that.pushView('goals');
-      });      
+      });
     },
     
     onLogout: function(e) {
@@ -114,7 +114,6 @@ Clementine.add('wt.controllers', function(exports) {
       }
     
       this.service.loginUser(email).then(function(user) {
-        console.log(user);
         localStorage.setItem('wellness_uid', user.id);
         that.fire('login', user.id);        
       }, function() {
@@ -157,14 +156,6 @@ Clementine.add('wt.controllers', function(exports) {
     // State Handlers
     
     onWillLoad: function() {
-    
-      var that = this;
-                
-      this.categoriesRequest = this.service.getCategories().then(function(categories) {
-        that.renderCategories(categories);
-      }, function() {
-        ErrorHandler.show('Could not load categories');
-      });
       
       var startDate = new Date();
       
@@ -199,20 +190,38 @@ Clementine.add('wt.controllers', function(exports) {
     // Public Methods
     
     setUserId: function(userId) {
-        
-      var that = this;
     
       this.userId = userId;
-      var goalsRequest = this.service.getUserGoals(userId);
       
-      return $.when(goalsRequest, this.categoriesRequest).then(function(goals) {
-        setTimeout(function() {
-          that.renderGoals(goals);
-        }, 0);
+      var that = this, deferred = jQuery.Deferred();
+                
+      this.service.getCategories().then(function(categories) {
+        that.renderCategories(categories).done(function() {
+          deferred.resolve();
+        });
+      }, function() {
+        ErrorHandler.show('Could not load categories');
+      });
+      
+      return deferred;
+      
+    },
+    
+    requestGoals: function(e) {
+      
+      var that = this;
+            
+      if (!this.userId) {
+        console.log('No user specified');
+        return;
+      }
+      
+      return this.service.getUserGoals(this.userId).then(function(goals) {
+        that.renderGoals(goals);
       }, function() {
         ErrorHandler.show('Error fetching goals');
       });
-    
+      
     },
     
     renderCategories: function(categories) {
@@ -237,20 +246,23 @@ Clementine.add('wt.controllers', function(exports) {
         goals.append(el);
         
       });
+            
+      return this.requestGoals();
       
     },
     
     renderGoals: function(goals) {
           
       var goalsEl = this.getElement('goal-forms'), that = this;
+            
       this.goalsCount = 0;
       
       _.each(goals, function(goal) {
         
         that.goalsCount++;
-        
+                
         var el = goalsEl.find('.goal-item[itemid="' + goal.selectedGoal.category.id + '"]');
-        
+                
         el.removeClass('unset');
         el.find('.goal-name').text(goal.selectedGoal.displayText).attr('itemid', goal.selectedGoal.id);
         el.find('.value-field').attr('placeholder', goal.targetValue);
@@ -513,7 +525,8 @@ Clementine.add('wt.controllers', function(exports) {
     // Public Methods
     
     setData: function(goal) {
-            
+      
+      this.getElement('goal-id-field').val(goal.id);
       this.getElement('goal-category').text(goal.category.name).attr('itemid', goal.category.id);
       var unitField = this.getElement('unit-field').val('');
       
@@ -554,7 +567,7 @@ Clementine.add('wt.controllers', function(exports) {
       e.stopPropagation();
       
       var that = this;
-      
+            
       var data = {
         goalId: this.getElement('goal-id-field').val(),
         categoryId: this.getElement('goal-category').attr('itemid'),

@@ -65,7 +65,7 @@ Clementine.add('wt.services', function(exports) {
     
     saveGoal: function(userId, goalId, unitId, targetValue) {
       
-      var data = {
+      var params = {
         UserId: userId,
         GoalId: goalId,
         UnitId: unitId,
@@ -80,7 +80,7 @@ Clementine.add('wt.services', function(exports) {
     
     saveCustomGoal: function(userId, goalId, targetValue, customName, customUnit) {
       
-      var data = {
+      var params = {
         UserId: userId,
         GoalId: goalId,
         TargetValue: targetValue,
@@ -96,7 +96,7 @@ Clementine.add('wt.services', function(exports) {
     
     setGoalProgress: function(userId, goalId, currentValue) {
       
-      var data = {
+      var params = {
         UserId: userId,
         GoalId: goalId,
         CurrentValue: currentValue

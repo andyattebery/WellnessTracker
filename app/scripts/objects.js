@@ -90,8 +90,8 @@ Clementine.add('wt.objects', function(exports) {
     this.selectedGoal = new Goal(data.SelectedGoal);
     this.selectedUnit = new Unit(data.SelectedUnit);
     this.targetValue = data.TargetValue;
-    this.customName = data.CustomName;
-    this.latestEntryValue = data.LatestEntryValue;
+    this.customName = data.CustomGoal;
+    this.latestEntryValue = data.LatestValue;
     
   }
   
