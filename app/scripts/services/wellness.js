@@ -116,11 +116,10 @@ Clementine.add('wt.services', function(exports) {
     
     },
     
-    saveGoal: function(userId, categoryId, goalId, unitId, targetValue) {
+    saveGoal: function(userId, goalId, unitId, targetValue) {
       
       var data = {
         UserId: userId,
-        CategoryId: categoryId,
         GoalId: goalId,
         UnitId: unitId,
         TargetValue: targetValue
@@ -141,11 +140,10 @@ Clementine.add('wt.services', function(exports) {
     
     },
     
-    saveCustomGoal: function(userId, categoryId, goalId, targetValue, customName, customUnit) {
+    saveCustomGoal: function(userId, goalId, targetValue, customName, customUnit) {
       
       var data = {
         UserId: userId,
-        CategoryId: categoryId,
         GoalId: goalId,
         TargetValue: targetValue,
         CustomName: customName,
@@ -183,9 +181,7 @@ Clementine.add('wt.services', function(exports) {
       }, 1000);
       
       return deferred;
-      
-      // return UserGoal
-      
+            
     }
   
   });

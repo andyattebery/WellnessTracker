@@ -4,7 +4,12 @@
   
     <div data-control="goal-chooser">
       
-      <div data-name="close-btn">Close</div>
+      <header class="header-toolbar">
+      
+        <div data-name="close-btn" class="left-btn">Close</div>
+        <h1>Choose Goal</h1>
+      
+      </header>
       
       <ul data-name="list"></ul>
       
@@ -12,7 +17,12 @@
     
     <div data-control="goal-editor">
       
-      <div data-name="back-btn"></div>
+      <header class="header-toolbar">
+      
+        <div data-name="back-btn" class="left-btn">Back</div>
+        <h1>Setup Goal</h1>
+      
+      </header>
       
       <form>
       
@@ -34,7 +44,7 @@
         <input type="text" id="custom-unit-field" data-name="custom-unit-field" placeholder="Unit" maxlength="50" />
         
         <label for="value-field">Target Value</label>
-        <input type="text" id="value-field" data-name="value-field" placeholder="Target Value" maxlength="10" />
+        <input type="number" id="value-field" data-name="value-field" placeholder="Target Value" maxlength="10" />
       
         <input type="button" id="save-btn" data-name="save-btn" value="Set Goal" />
             

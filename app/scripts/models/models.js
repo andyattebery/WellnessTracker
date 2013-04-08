@@ -14,6 +14,10 @@ Clementine.add('wt.models', function(exports) {
         localStorage.setItem('wellness_uid', user.id);
       });
       
+    },
+    
+    logoutUser: function() {
+      localStorage.removeItem('wellness_uid');
     }
   
   });
@@ -48,15 +52,15 @@ Clementine.add('wt.models', function(exports) {
           
     },
     
-    saveGoal: function(categoryId, goalId, unitId, targetValue) {
+    saveGoal: function(goalId, unitId, targetValue) {
       
-      return this.service.saveGoal(this.userId, categoryId, goalId, unitId, targetValue);
+      return this.service.saveGoal(this.userId, goalId, unitId, targetValue);
     
     },
     
-    saveCustomGoal: function(categoryId, goalId, targetValue, customName, customUnit) {
+    saveCustomGoal: function(goalId, targetValue, customName, customUnit) {
       
-      return this.service.saveCustomGoal(this.userId, categoryId, goalId, targetValue, customName, customUnit);
+      return this.service.saveCustomGoal(this.userId, goalId, targetValue, customName, customUnit);
       
     },
     

@@ -27,7 +27,8 @@ Clementine.add('wt.controllers', function(exports) {
     
     getBindings: function() {
       return {
-        'login': { 'login': this.onLogin }
+        'login': { 'login': this.onLogin },
+        'goals': { 'logout': this.onLogout }
       };
     },
     
@@ -47,6 +48,12 @@ Clementine.add('wt.controllers', function(exports) {
       this.getView('goals').setUserId(e.data);
       this.pushView('goals');
       
+    },
+    
+    onLogout: function(e) {
+      e.stopPropagation();
+      this.getView('login').logout();
+      this.popToRootView();    
     }
     
   });
@@ -83,6 +90,13 @@ Clementine.add('wt.controllers', function(exports) {
       };
     },
     
+    // Public Methods
+    
+    logout: function() {
+      this.getElement('email-field').val('');
+      this.model.logoutUser();
+    },
+    
     // State Handlers
     
     onDidAppear: function() {
@@ -111,9 +125,15 @@ Clementine.add('wt.controllers', function(exports) {
     
     $onLogin: function(e) {
       
-      e.stopPropagation();
+      if (e) {
+        e.stopPropagation();
+      }
       
-      var email = this.getElement('email-field'), that = this;
+      var email = this.getElement('email-field').val(), that = this;
+            
+      if (!email) {
+        return ErrorHandler.show('Please enter an email');
+      }
     
       this.model.loginUser(email).then(function(user) {
         that.fire('login', user.id);        
@@ -144,7 +164,7 @@ Clementine.add('wt.controllers', function(exports) {
     },
     
     getOutlets: function() {
-      return ['goal-setup', 'goal-forms(.goal)', 'update-btn'];
+      return ['goal-setup', 'goal-forms(.goal)', 'update-btn', 'back-btn', 'period'];
     },
     
     getBindings: function() {
@@ -152,7 +172,8 @@ Clementine.add('wt.controllers', function(exports) {
         'modal-view': { 'close': this.onClose, 'save': this.onSave },
         'goal-forms(.set)': { 'touchclick': this.$onSet },
         'goal-forms(.value-field)': { 'blur': this.$onBlur },
-        'update-btn': { 'touchclick': this.$onUpdate } 
+        'update-btn': { 'touchclick': this.$onUpdate } ,
+        'back-btn': { 'touchclick': this.$onBack }
       };
     },
     
@@ -171,6 +192,29 @@ Clementine.add('wt.controllers', function(exports) {
       }, function() {
         ErrorHandler.show('Could not load categories');
       });
+      
+      var startDate = new Date();
+      
+      var months = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December'
+      ];
+      
+      while (startDate.getDay() !== 0) {
+        startDate = startDate.setDate(startDate.getDate() - 1);
+      }
+      
+      this.getElement('period').text(months[startDate.getMonth()] + ' ' + startDate.getDate() + ', ' + startDate.getFullYear());
       
       this.getElement('update-btn').hide();
       
@@ -210,13 +254,8 @@ Clementine.add('wt.controllers', function(exports) {
         el.append('<div class="goal-name"></div>');
         el.append('<div class="goal-value"></div>');
         el.append('<div class="goal-unit"></div>');
-        el.append('<input type="text" class="value-field" name="value" />');
+        el.append('<input type="number" class="value-field" name="value" />');
         el.append('<input type="button" class="set-goal-btn set" value="Set Goal" />');
-        
-        el.find('.goal-name').hide();
-        el.find('.goal-value').hide();
-        el.find('.goal-unit').hide();
-        el.find('.value-field').hide();
         
         goals.append(el);
         
@@ -236,12 +275,6 @@ Clementine.add('wt.controllers', function(exports) {
         el.find('.goal-name').text(goal.selectedGoal.name).attr('itemid', goal.selectedGoal.id);
         el.find('.goal-value').text(goal.targetValue);
         el.find('.goal-unit').text(goal.selectedUnit.name);
-        el.find('[type="button"]').hide();
-        
-        el.find('.goal-name').show();
-        el.find('.goal-value').show();
-        el.find('.goal-unit').show();
-        el.find('.value-field').show();
       
       });
     
@@ -269,11 +302,6 @@ Clementine.add('wt.controllers', function(exports) {
         el.find('.goal-value').text(userGoal.targetValue);
         el.find('.goal-unit').text(userGoal.selectedUnit.name);
         el.find('[type="button"]').hide();
-        
-        el.find('.goal-name').show();
-        el.find('.goal-value').show();
-        el.find('.goal-unit').show();
-        el.find('.value-field').show();
       
         that.getView('modal-view').dismissModalView();
         
@@ -285,9 +313,9 @@ Clementine.add('wt.controllers', function(exports) {
       }
             
       if (goal.customField.length > 0) {
-        this.model.saveCustomGoal(goal.categoryId, goal.goalId, goal.targetValue, goal.customField, goal.customUnitField).then(success, failure);
+        this.model.saveCustomGoal(goal.goalId, goal.targetValue, goal.customField, goal.customUnitField).then(success, failure);
       } else {
-        this.model.saveGoal(goal.categoryId, goal.goalId, goal.unitId, goal.targetValue).then(success, failure);
+        this.model.saveGoal(goal.goalId, goal.unitId, goal.targetValue).then(success, failure);
       }
       
     },
@@ -358,6 +386,11 @@ Clementine.add('wt.controllers', function(exports) {
         
       });
       
+    },
+    
+    $onBack: function(e) {
+      e.stopPropagation();
+      this.fire('logout');
     }
     
   });
@@ -424,7 +457,7 @@ Clementine.add('wt.controllers', function(exports) {
     getBindings: function() {
       return {
         'close-btn': { 'touchclick': this.$onClose },
-        'list(.goal-item)': { 'click': this.$onSelect }
+        'list(.goal-list-item)': { 'click': this.$onSelect }
       };
     },
     
@@ -447,7 +480,7 @@ Clementine.add('wt.controllers', function(exports) {
           sortKey = item.sortField;
         }
         
-        var el = $('<li class="goal-item" itemid="' + item.id + '"></li>');
+        var el = $('<li class="goal-list-item" itemid="' + item.id + '"></li>');
         
         el.append('<div class="name">' + item.name + '</div>');
         

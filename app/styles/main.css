@@ -241,3 +241,221 @@ div, span, li, ul {
   top: 0;
   width: 100%;
 }
+
+/* goal form */
+
+#goal-forms {
+  overflow: hidden; 
+}
+
+/* goal items */
+
+.goal-item {
+  background: #EEE;
+  padding: 10px;
+  margin: 5%;
+  box-sizing: border-box;
+  float: left;
+  min-height: 160px;
+  width: 40%;
+}
+
+@media screen and (min-width: 400px) {
+
+  .goal-item {
+    margin: 3%;
+    width: 44%;
+  }
+
+}
+
+@media screen and (min-width: 800px) {
+
+  .goal-item {
+    margin: 2%;
+    width: 46%;
+  }
+
+}
+
+@media screen and (min-width: 1200px) {
+
+  .goal-item {
+    margin: 1%;
+    width: 48%;
+  }
+
+}
+
+
+.goal-item .value-field {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.goal-item.unset .goal-name {
+  display: none;
+}
+
+.goal-item.unset .goal-value {
+  display: none;
+}
+
+.goal-item.unset .goal-unit {
+  display: none;
+}
+
+.goal-item.unset .value-field {
+  display: none;
+}
+
+.goal-item .set-goal-btn {
+  display: none;
+}
+
+.goal-item.unset .set-goal-btn {
+  display: block;
+}
+
+.goal-item.updating {
+  opacity: .5;
+}
+
+/* login view */
+
+.view.login {
+  background: #F6F6F6;
+}
+
+.view.login h1 {
+  color: #999;
+  font-size: 36px;
+  font-weight: 200;
+  text-align: center;
+  padding: 20px 0;
+  width: 100%;
+}
+
+.view.login label {
+  color: #666;
+  display: block;
+  font-size: 14px;
+  padding-left: 5%;
+  padding-bottom: 6px;
+}
+
+#email-field {
+  border: 1px solid #999;
+  display: block;
+  font-size: 16px;
+  margin: 0 auto 20px auto;
+  padding: 10px 12px;
+  box-sizing: border-box;
+  width: 90%;
+}
+
+#login-btn {
+  display: block;
+  font-size: 16px;
+  margin: 0 auto 0 auto;
+  padding: 10px 12px;
+  box-sizing: border-box;
+  width: 90%;
+}
+
+/* goals view */
+
+.view.goals {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* header toolbar */
+
+.header-toolbar {
+  background: #DDD;
+  height: 44px;
+  width: 100%;
+}
+
+.header-toolbar .left-btn {
+  position: absolute;
+  left: 15px;
+  padding: 0;
+  margin: 0;
+  line-height: 44px;
+}
+
+.header-toolbar h1 {
+  height: auto;
+  overflow: hidden;
+  text-align: center;
+  padding: 0;
+  line-height: 44px;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  margin: 0 auto;
+  width: 80%;
+}
+
+ul.list {
+  position: absolute;
+  top: 44px;
+  bottom: 0;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+
+li.goal-header {
+  background: #CCC;
+  color: #333;
+  height: 30px;
+  line-height: 30px;
+  border-top: 1px solid #CCC;
+  padding: 0 12px;
+  box-sizing: border-box;
+}
+
+li.goal-header:first-child {
+  border-top-color: transparent;
+}
+
+li.goal-list-item {
+  cursor: pointer;
+  height: 44px;
+  line-height: 44px;
+  border-top: 1px solid #CCC;
+  padding: 0 12px;
+  box-sizing: border-box;
+}
+
+li.goal-list-item:last-child {
+  border-bottom: 1px solid #CCC;;
+}
+
+li.goal-list-item:active {
+  background: #F00;
+  border-top-color: transparent;
+}
+
+li.goal-list-item:active + li {
+  border-top-color: transparent;
+}
+
+/* buttons */
+
+#update-btn {
+  width: 80%;
+  padding: 10px;
+  margin: 0 auto;
+  display: block;
+  margin-bottom: 10px;
+  border: 1px solid #CCC;
+  background: #EEE;
+  cursor: pointer;
+}
