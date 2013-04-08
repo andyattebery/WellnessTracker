@@ -95,28 +95,11 @@ Clementine.add('wt.objects', function(exports) {
     
   }
   
-  /**
-   * An entry tracking the user's progress towards a goal.
-   */
-  function TrackingEntry(data) {
-    
-    if (!data) {
-      throw 'Invalid data for TrackingEntry';
-    }
-    
-    this.id = data.Id;
-    this.value = data.Value;
-    this.date = data.Date;
-    this.goal = new UserGoal(data.Goal);
-    
-  }
-  
   exports.User = User;
   exports.Category = Category;
   exports.Target = Target;
   exports.Unit = Unit;
   exports.Goal = Goal;
   exports.UserGoal = UserGoal;
-  exports.TrackingEntry = TrackingEntry;
 
 });

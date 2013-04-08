@@ -325,3 +325,21 @@ li.goal-list-item:active + li {
   text-align: center;
   font-size: 14px;
 }
+
+/* goal editor */
+
+.goal-editor .goal-label, .goal-editor .custom-field, .goal-editor .custom-unit-field {
+  display: none;
+}
+
+.goal-editor .unit-field, .goal-editor .goal-name {
+  display: block;
+}
+
+.goal-editor.custom .goal-label, .goal-editor.custom .custom-field, .goal-editor.custom .custom-unit-field {
+  display: block;
+}
+
+.goal-editor.custom .unit-field, .goal-editor.custom .goal-name {
+  display: none;
+}

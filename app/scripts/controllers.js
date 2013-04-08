@@ -5,24 +5,12 @@ Clementine.add('wt.controllers', function(exports) {
   var NavigationController  = include('ui').NavigationController;
   var ModalViewController   = include('ui').ModalViewController;
   
-  var WellnessViewModel     = include('wt.models').WellnessViewModel;
-  var LoginViewModel        = include('wt.models').LoginViewModel;
-  var GoalsViewModel        = include('wt.models').GoalsViewModel;
-  
-  /**
-   @class WellnessController
-   @extends NavigationController
-  */
   var WellnessController = NavigationController.extend({
     
     // Configuration
     
     getType: function() {
       return 'wellness';
-    },
-    
-    getOutlets: function() {
-      return ['login', 'goals'];
     },
     
     getBindings: function() {
@@ -58,16 +46,11 @@ Clementine.add('wt.controllers', function(exports) {
     
   });
   
-  /**
-   @class LoginController
-   @extends ViewController
-   @fires login
-  */
   var LoginController = ViewController.extend({
   
     initialize: function(parent, target, app) {
 
-      this.model = new LoginViewModel(app.getService('wt'));
+      this.service = app.getService('wt');
     
       this._super(parent, target, app);
     
@@ -77,10 +60,6 @@ Clementine.add('wt.controllers', function(exports) {
   
     getType: function() {
       return 'login';
-    },
-    
-    getOutlets: function() {
-      return ['email-field', 'login-btn'];
     },
     
     getBindings: function() {
@@ -94,7 +73,7 @@ Clementine.add('wt.controllers', function(exports) {
     
     logout: function() {
       this.getElement('email-field').val('');
-      this.model.logoutUser();
+      localStorage.removeItem('wellness_uid');
     },
     
     // State Handlers
@@ -135,7 +114,8 @@ Clementine.add('wt.controllers', function(exports) {
         return ErrorHandler.show('Please enter an email');
       }
     
-      this.model.loginUser(email).then(function(user) {
+      this.service.loginUser(email).then(function(user) {
+        localStorage.setItem('wellness_uid', user.id);
         that.fire('login', user.id);        
       }, function() {
         ErrorHandler.show('Could not login');
@@ -145,26 +125,19 @@ Clementine.add('wt.controllers', function(exports) {
   
   });
   
-  /**
-   @class GoalsController
-   @extends ViewController
-  */
   var GoalsController = ViewController.extend({
     
     initialize: function(parent, target, app) {
     
-      this.model = new GoalsViewModel(app.getService('wt'));
-                  
+      this.service = app.getService('wt');
+      this.userId = null;
+      
       this._super(parent, target, app);
     
     },
     
     getType: function() {
       return 'goals';
-    },
-    
-    getOutlets: function() {
-      return ['goal-setup', 'goal-forms(.goal)', 'update-btn', 'back-btn', 'period'];
     },
     
     getBindings: function() {
@@ -187,7 +160,7 @@ Clementine.add('wt.controllers', function(exports) {
     
       var that = this;
                 
-      this.categoriesRequest = this.model.getCategories().then(function(categories) {
+      this.categoriesRequest = this.service.getCategories().then(function(categories) {
         that.renderCategories(categories);
       }, function() {
         ErrorHandler.show('Could not load categories');
@@ -229,7 +202,8 @@ Clementine.add('wt.controllers', function(exports) {
         
       var that = this;
     
-      var goalsRequest = this.model.getUserGoals(userId);
+      this.userId = userId;
+      var goalsRequest = this.service.getUserGoals(userId);
       
       $.when(goalsRequest, this.categoriesRequest).then(function(goals) {
         setTimeout(function() {
@@ -339,9 +313,9 @@ Clementine.add('wt.controllers', function(exports) {
       }
             
       if (goal.customField.length > 0) {
-        this.model.saveCustomGoal(goal.goalId, goal.targetValue, goal.customField, goal.customUnitField).then(success, failure);
+        this.service.saveCustomGoal(this.userId, goal.goalId, goal.targetValue, goal.customField, goal.customUnitField).then(success, failure);
       } else {
-        this.model.saveGoal(goal.goalId, goal.unitId, goal.targetValue).then(success, failure);
+        this.service.saveGoal(this.userId, goal.goalId, goal.unitId, goal.targetValue).then(success, failure);
       }
       
     },
@@ -354,7 +328,7 @@ Clementine.add('wt.controllers', function(exports) {
       
       var categoryId = $(e.currentTarget).closest('.goal-item').attr('itemid'), that = this;
             
-      this.model.getGoalsForCategory(categoryId).then(function(data) {
+      this.service.getGoalsForCategory(categoryId).then(function(data) {
         that.getView('modal-view').getView('goal-setup').setData(data);
         that.getView('modal-view').presentModalView();
       }, function() {
@@ -407,7 +381,7 @@ Clementine.add('wt.controllers', function(exports) {
         
         el.addClass('updating').removeClass('error');
         
-        that.model.updateGoal(goalId, value).then(function() {
+        that.service.setGoalProgress(that.userId, goalId, value).then(function() {
           el.removeClass('updating');
           el.find('input[type="number"]').attr('disabled', 'disabled');
         }, function() {
@@ -425,20 +399,10 @@ Clementine.add('wt.controllers', function(exports) {
     
   });
   
-  /**
-   @class GoalSetupController
-   @extends NavigationController
-   @bubbles close
-   @fires save
-  */
   var GoalSetupController = NavigationController.extend({
     
     getType: function() {
       return 'goal-setup';
-    },
-    
-    getOutlets: function() {
-      return ['goal-chooser', 'goal-editor'];
     },
     
     getBindings: function() {
@@ -469,19 +433,10 @@ Clementine.add('wt.controllers', function(exports) {
     
   });
   
-  /**
-   @class GoalChooserController
-   @extends ItemListController
-   @fires close, select
-  */
   var GoalChooserController = ViewController.extend({
     
     getType: function() {
       return 'goal-chooser';
-    },
-    
-    getOutlets: function() {
-      return ['close-btn'];
     },
     
     getBindings: function() {
@@ -542,19 +497,10 @@ Clementine.add('wt.controllers', function(exports) {
     
   });
   
-  /**
-   @class GoalEditorController
-   @extends ViewController
-   @fires back, save
-  */
   var GoalEditorController = ViewController.extend({
     
     getType: function() {
       return 'goal-editor';
-    },
-    
-    getOutlets: function() {
-      return ['back-btn', 'goal-name', 'goal-category', 'custom-field', 'unit-field', 'custom-unit-field', 'value-field', 'save-btn', 'goal-id-field'];
     },
     
     getBindings: function(e) {
@@ -569,26 +515,22 @@ Clementine.add('wt.controllers', function(exports) {
     setData: function(goal) {
             
       this.getElement('goal-category').text(goal.category.name).attr('itemid', goal.category.id);
-      var unitField = this.getElement('unit-field');
+      var unitField = this.getElement('unit-field').val('');
       
-      this.getElement('goal-id-field').val(goal.id);
       this.getElement('value-field').val('');
-            
-      if (goal.category.name === 'Custom') {
+      this.getElement('custom-field').val('');
+      this.getElement('custom-unit-field').val('');
+      this.getElement('goal-name').text('');
       
-        this.getElement('goal-label').show();
-        this.getElement('custom-field').val('').show();
-        this.getElement('custom-unit-field').val('').show();
-        this.getElement('unit-field').val('').hide();
-        this.getElement('goal-name').val('').hide();
+      if (goal.category.name === 'Custom') {
+
+        this.target.addClass('custom');        
+        this.getElement('goal-name').text('');
               
       } else {
       
-        this.getElement('goal-label').hide();
-        this.getElement('custom-field').val('').hide();
-        this.getElement('custom-unit-field').val('').hide();
-        this.getElement('unit-field').val('').show();
-        this.getElement('goal-name').text(goal.name + ' Goal').show();
+        this.target.removeClass('custom');
+        this.getElement('goal-name').text(goal.name + ' Goal');
       
         unitField.empty();
         
@@ -647,4 +589,4 @@ Clementine.add('wt.controllers', function(exports) {
   exports.GoalChooserController = GoalChooserController;
   exports.GoalEditorController  = GoalEditorController;
 
-}, ['ui', 'wt.models']);
+}, ['ui']);

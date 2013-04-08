@@ -2,12 +2,12 @@ Clementine.add('wt.services', function(exports) {
 
   var Service = Clementine.Service;
   
-  var Category = include('wt.objects').Category;
-  var User = include('wt.objects').User;
-  var Target = include('wt.objects').Target;
-  var Unit = include('wt.objects').Unit;
-  var UserGoal = include('wt.objects').UserGoal;
-  var Goal = include('wt.objects').Goal;
+  var Category  = include('wt.objects').Category;
+  var User      = include('wt.objects').User;
+  var Target    = include('wt.objects').Target;
+  var Unit      = include('wt.objects').Unit;
+  var UserGoal  = include('wt.objects').UserGoal;
+  var Goal      = include('wt.objects').Goal;
 
   var WellnessService = Clementine.Service.extend({
   
