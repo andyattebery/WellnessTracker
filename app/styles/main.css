@@ -91,15 +91,16 @@ ul {
 
 .header-toolbar .left-btn {
   cursor: pointer;
-  font-size: 13px;
+  font-size: 12px;
   line-height: 34px;
-  padding: 0 16px;
+  padding: 0 12px;
+  font-weight: 600;
   position: absolute;
   -webkit-box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.6), inset 0px 1px 0px #ffffff, 0px 1px 2px -1px rgba(0, 0, 0, 0.4);
   -webkit-box-shadow: inset 0 2px 1px -1px rgba(0, 0, 0, 0.25), inset 0px 0px 1px rgba(0, 0, 0, 0.7), 0px 1px 0px rgba(255, 255, 255, 0.1);
   -webkit-background-size: 15px 32px;
   border-radius: 4px;
-  margin: 5px 6px;
+  margin: 5px 5px;
   height: 32px;
 }
 
@@ -108,12 +109,13 @@ ul {
 }
 
 .header-toolbar h1 {
-  font-size: 16px;
+  font-size: 15px;
   height: 100%;
   line-height: 44px;
   margin: 0 auto;
   text-align: center;
-  font-weight: 500;
+  font-weight: 600;
+  text-shadow: 0px -1px #000;
   width: 80%;
 }
 
@@ -313,6 +315,9 @@ li.goal-list-item:active + li {
   margin-bottom: 16px;
   text-align: center;
   font-size: 18px;
+  border-bottom: 1px dotted #CCC;
+  padding-bottom: 14px;
+  color: #666;
 }
 
 .update-msg {

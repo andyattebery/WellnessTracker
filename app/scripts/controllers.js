@@ -172,8 +172,8 @@ Clementine.add('wt.controllers', function(exports) {
         'modal-view': { 'close': this.onClose, 'save': this.onSave },
         'goal-forms(.set)': { 'touchclick': this.$onSet },
         'goal-forms(.value-field)': { 'blur': this.$onBlur },
-        'update-btn': { 'touchclick': this.$onUpdate } ,
-        'back-btn': { 'touchclick': this.$onBack }
+        'update-btn': { 'click': this.$onUpdate } ,
+        'back-btn': { 'click': this.$onBack }
       };
     },
     
@@ -486,7 +486,7 @@ Clementine.add('wt.controllers', function(exports) {
     
     getBindings: function() {
       return {
-        'close-btn': { 'touchclick': this.$onClose },
+        'close-btn': { 'click': this.$onClose },
         'list(.goal-list-item)': { 'click': this.$onSelect }
       };
     },
