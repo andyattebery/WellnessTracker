@@ -256,6 +256,7 @@ Clementine.add('wt.controllers', function(exports) {
       var goalsEl = this.getElement('goal-forms'), that = this;
             
       this.goalsCount = 0;
+      var updated = false;
       
       _.each(goals, function(goal) {
         
@@ -270,16 +271,19 @@ Clementine.add('wt.controllers', function(exports) {
         
         if (goal.latestEntryValue) {
           el.find('.value-field').attr('disabled', 'disabled');
+          updated = true;  
         } else {
           el.find('.value-field').removeAttr('disabled');
         }
       
       });
       
-      if (this.goalsCount === 4) {
-        this.getElement('update-msg').text('Update Goals');
+      if (updated) {
+        this.getElement('update-msg').text('Goals already updated this week.');
+      } else if (this.goalsCount === 4) {
+        this.getElement('update-msg').text('Update goals for this week.');
       } else {
-        this.getElement('update-msg').text('Please Set Goals');
+        this.getElement('update-msg').text('Please set all your goals.');
       }
     
     },
