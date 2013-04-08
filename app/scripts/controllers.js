@@ -15,9 +15,61 @@ Clementine.add('wt.controllers', function(exports) {
     
     getBindings: function() {
       return {
-        'login': { 'login': this.onLogin },
-        'goals': { 'logout': this.onLogout }
+        'login': { 'login': this.onLogin, 'progress': this.onProgress },
+        'goals': { 'logout': this.onLogout, 'progress': this.onProgress }
       };
+    },
+    
+    // Public Methods
+    
+    setup: function() {
+      this.retainCount = 0;
+      this.progress = $('body > .progress');
+      this.indicator = this.setupLoading();
+    },
+    
+    setupLoading: function() {
+  
+      var opts = {
+        lines: 9, // The number of lines to draw
+        length: 6, // The length of each line
+        width: 4, // The line thickness
+        radius: 7, // The radius of the inner circle
+        color: '#FFF', // #rgb or #rrggbb
+        speed: 1, // Rounds per second
+        trail: 60, // Afterglow percentage
+        shadow: false // Whether to render a shadow
+      };
+        
+      return new Spinner(opts).spin(this.progress.get(0));
+  
+    },
+  
+    showLoading: function() {
+      if (this.retainCount === 0) {
+        clearTimeout(this.hideTimeout);
+        this.progress.removeClass('hidden');
+        this.showTimeout = setTimeout(proxy(function() {
+          this.progress.addClass('active');
+        }, this), 50);
+        this.indicator.spin(this.progress.get(0));
+      }
+      this.retainCount++;
+    },
+  
+    hideLoading: function() {
+      if (this.retainCount === 0) {
+        return;
+      }
+      this.retainCount--;
+      if (this.retainCount === 0) {
+        clearTimeout(this.showTimeout);
+        this.progress.removeClass('active');
+        this.hideTimeout = setTimeout(proxy(function() {
+          this.progress.addClass('hidden');
+          this.indicator.stop();
+        }, this), 500);
+      }
     },
     
     // State Handlers
@@ -41,6 +93,10 @@ Clementine.add('wt.controllers', function(exports) {
       e.stopPropagation();
       this.getView('login').logout();
       this.popToRootView();    
+    },
+    
+    onProgress: function(e) {
+      return e.data ? this.showLoading() : this.hideLoading();
     }
     
   });
@@ -82,6 +138,7 @@ Clementine.add('wt.controllers', function(exports) {
       var userId = localStorage.getItem('wellness_uid');
     
       if (userId) {
+        this.fire('progress', true);
         this.fire('login', userId);
       }
       
@@ -112,6 +169,8 @@ Clementine.add('wt.controllers', function(exports) {
       if (!email) {
         return ErrorHandler.show('Please enter an email');
       }
+      
+      this.fire('progress', true);
     
       this.service.loginUser(email).then(function(user) {
         localStorage.setItem('wellness_uid', user.id);
@@ -198,6 +257,7 @@ Clementine.add('wt.controllers', function(exports) {
       this.service.getCategories().then(function(categories) {
         that.renderCategories(categories).done(function() {
           deferred.resolve();
+          that.fire('progress', false);
         });
       }, function() {
         ErrorHandler.show('Could not load categories');
