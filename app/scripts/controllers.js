@@ -281,6 +281,12 @@ Clementine.add('wt.controllers', function(exports) {
         el.find('.goal-name').text(goal.selectedGoal.displayText).attr('itemid', goal.selectedGoal.id);
         el.find('.value-field').attr('placeholder', goal.targetValue);
         el.find('.goal-unit').text(goal.selectedUnit.name);
+        
+        if (goal.latestEntryValue) {
+          el.find('.value-field').attr('disabled', 'disabled');
+        } else {
+          el.find('.value-field').removeAttr('disabled');
+        }
       
       });
       
@@ -403,6 +409,7 @@ Clementine.add('wt.controllers', function(exports) {
         
         that.model.updateGoal(goalId, value).then(function() {
           el.removeClass('updating');
+          el.find('input[type="number"]').attr('disabled', 'disabled');
         }, function() {
           el.removeClass('updating').addClass('error');
         });

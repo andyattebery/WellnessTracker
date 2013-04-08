@@ -195,15 +195,16 @@ ul {
 }
 
 .goal-item .goal-label {
-  margin: 20px auto;
+  margin: 10px auto;
   display: block;
   font-size: 13px;
+  height: 40px;
   font-weight: 400;
   padding: 4px 0;
   text-align: center;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  vertical-align: middle;
 }
 
 .set-goal-btn {
