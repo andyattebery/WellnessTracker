@@ -49,6 +49,9 @@ ul {
   margin: 20px auto;
   width: 300px;
   -webkit-background-size: 300px 160px;
+  -moz-background-size: 300px 160px;
+  -ms-background-size: 300px 160px;
+  background-size: 300px 160px;
 }
 
 .login-label {
