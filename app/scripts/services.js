@@ -70,13 +70,13 @@ Clementine.add('wt.services', function(exports) {
       deferred.resolve([
         new UserGoal({
           Id: 1,
-          SelectedGoal: { Id: 1, Name: 'Weight', Category: { Id: 1, Name: 'Fitness' }, Target: { Id: 1, Name: 'less' }, ValidUnits: [] },
+          SelectedGoal: { Id: 1, Name: 'Weight', DisplayText: 'Weight Lost', Category: { Id: 1, Name: 'Fitness' }, Target: { Id: 1, Name: 'less' }, ValidUnits: [] },
           SelectedUnit: { Id: 1, Name: 'Pounds' },
           TargetValue: 20
         }),
         new UserGoal({
           Id: 2,
-          SelectedGoal: { Id: 1, Name: 'Fiber', Category: { Id: 2, Name: 'Nutrition' }, Target: { Id: 2, Name: 'more' }, ValidUnits: [] },
+          SelectedGoal: { Id: 1, Name: 'Fiber', DisplayText: 'Fiber Eaten', Category: { Id: 2, Name: 'Nutrition' }, Target: { Id: 2, Name: 'more' }, ValidUnits: [] },
           SelectedUnit: { Id: 1, Name: 'Grams' },
           TargetValue: 50
         })
@@ -131,7 +131,7 @@ Clementine.add('wt.services', function(exports) {
       
       deferred.resolve(new UserGoal({
         Id: 1,
-        SelectedGoal: { Id: 1, Name: 'Weight', Category: { Id: 3, Name: 'Fitness' }, Target: { Id: 1, Name: 'less' }, ValidUnits: [] },
+        SelectedGoal: { Id: 1, Name: 'Weight', DisplayText: 'Lost', Category: { Id: 3, Name: 'Fitness' }, Target: { Id: 1, Name: 'less' }, ValidUnits: [] },
         SelectedUnit: { Id: 1, Name: 'Pounds' },
         TargetValue: 12
       }));
@@ -156,7 +156,7 @@ Clementine.add('wt.services', function(exports) {
       
       deferred.resolve(new UserGoal({
         Id: 1,
-        SelectedGoal: { Id: 1, Name: 'Weight', Category: { Id: 4, Name: 'Custom' }, Target: { Id: 1, Name: 'less' }, ValidUnits: [] },
+        SelectedGoal: { Id: 1, Name: 'Weight', DisplayText: '', Category: { Id: 4, Name: 'Custom' }, Target: { Id: 1, Name: 'less' }, ValidUnits: [] },
         SelectedUnit: { Id: 1, Name: 'My Custom Unit' },
         TargetValue: 45,
         CustomName: 'My Custom Goal'

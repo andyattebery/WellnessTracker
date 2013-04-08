@@ -70,14 +70,17 @@ Clementine.add('ui', function(exports) {
       }
       
       setTimeout(proxy(function() {
-        this._target.addClass('visible');
+        this._target.addClass('animating');
         setTimeout(proxy(function() {
-          this.modalVisible = true;
-          if (callback) {
-            callback.call(context || this);
-          }
-          this.next();
-        }, this), 300);
+          this._target.addClass('visible');
+          setTimeout(proxy(function() {
+            this.modalVisible = true;
+            if (callback) {
+              callback.call(context || this);
+            }
+            this.next();
+          }, this), 300);
+        }, this), 100)
       }, this), 50);
       
     },
@@ -104,6 +107,9 @@ Clementine.add('ui', function(exports) {
         if (callback) {
           callback.call(context || this);
         }
+        setTimeout(proxy(function() {
+          this._target.removeClass('animating');
+        }, this), 100);
         this.next();
       }, this), 300);
     },

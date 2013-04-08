@@ -4,11 +4,9 @@
   
     <div data-control="goal-chooser">
       
-      <header class="header-toolbar">
-      
+      <header class="header-toolbar navbar-inner">
         <div data-name="close-btn" class="left-btn">Close</div>
         <h1>Choose Goal</h1>
-      
       </header>
       
       <ul data-name="list"></ul>
@@ -17,24 +15,20 @@
     
     <div data-control="goal-editor">
       
-      <header class="header-toolbar">
-      
+      <header class="header-toolbar navbar-inner">
         <div data-name="back-btn" class="left-btn">Back</div>
-        <h1>Setup Goal</h1>
-      
+        <h1>Setup <span data-name="goal-category"></span> Goal</h1>
       </header>
       
-      <form>
+      <form class="goals-form">
       
         <input type="hidden" data-name="goal-id-field" />
-      
-        <div data-name="goal-category"></div>
-        
+              
         <div class="goal-info">
           
           <div data-name="goal-name"></div>
           
-          <label for="value-field">Goal Name</label>
+          <label for="value-field" data-name="goal-label">Goal Name</label>
           <input type="text" id="custom-field" data-name="custom-field" placeholder="Goal Name" maxlength="50" />
           
         </div>
@@ -46,7 +40,7 @@
         <label for="value-field">Target Value</label>
         <input type="number" id="value-field" data-name="value-field" placeholder="Target Value" maxlength="10" />
       
-        <input type="button" id="save-btn" data-name="save-btn" value="Set Goal" />
+        <input type="button" id="save-btn" data-name="save-btn" class="btn" value="Set Goal" />
             
       </form>
       

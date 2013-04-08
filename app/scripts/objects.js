@@ -67,6 +67,7 @@ Clementine.add('wt.objects', function(exports) {
   
     this.id = data.Id;
     this.name = data.Name;
+    this.displayText = data.DisplayText;
     this.category = new Category(data.Category);
     this.target = new Target(data.Target);
     this.sortField = this.target.name;

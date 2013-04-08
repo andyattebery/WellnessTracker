@@ -209,14 +209,15 @@ Clementine.add('wt.controllers', function(exports) {
         'November',
         'December'
       ];
-      
+            
       while (startDate.getDay() !== 0) {
-        startDate = startDate.setDate(startDate.getDate() - 1);
+        startDate = new Date(startDate.setDate(startDate.getDate() - 1));
       }
       
       this.getElement('period').text(months[startDate.getMonth()] + ' ' + startDate.getDate() + ', ' + startDate.getFullYear());
       
       this.getElement('update-btn').hide();
+      this.getElement('update-msg').show();
       
       this._super();
     
@@ -251,11 +252,13 @@ Clementine.add('wt.controllers', function(exports) {
         
         var el = $('<li class="goal-item unset" itemid="' + category.id + '"></li>');
         el.append('<div class="goal-title">' + category.name + '</div>');
-        el.append('<div class="goal-name"></div>');
-        el.append('<div class="goal-value"></div>');
-        el.append('<div class="goal-unit"></div>');
+        var container = $('<div class="goal-label"></div>');
+        container.append('<span class="goal-unit"></span> ');
+        container.append('<span class="goal-name"></span> ');
+        container.append('<span class="goal-value hidden"></span>');
+        el.append(container);
         el.append('<input type="number" class="value-field" name="value" />');
-        el.append('<input type="button" class="set-goal-btn set" value="Set Goal" />');
+        el.append('<input type="button" class="set-goal-btn btn set" value="Set Goal" />');
         
         goals.append(el);
         
@@ -265,18 +268,27 @@ Clementine.add('wt.controllers', function(exports) {
     
     renderGoals: function(goals) {
           
-      var goalsEl = this.getElement('goal-forms');
-                  
-      _.each(goals, function(goal) {
+      var goalsEl = this.getElement('goal-forms'), that = this;
+      this.goalsCount = 0;
       
+      _.each(goals, function(goal) {
+        
+        that.goalsCount++;
+        
         var el = goalsEl.find('.goal-item[itemid="' + goal.selectedGoal.category.id + '"]');
         
         el.removeClass('unset');
-        el.find('.goal-name').text(goal.selectedGoal.name).attr('itemid', goal.selectedGoal.id);
-        el.find('.goal-value').text(goal.targetValue);
+        el.find('.goal-name').text(goal.selectedGoal.displayText).attr('itemid', goal.selectedGoal.id);
+        el.find('.value-field').attr('placeholder', goal.targetValue);
         el.find('.goal-unit').text(goal.selectedUnit.name);
       
       });
+      
+      if (this.goalsCount === 4) {
+        this.getElement('update-msg').text('Update Goals');
+      } else {
+        this.getElement('update-msg').text('Please Set Goals');
+      }
     
     },
     
@@ -299,11 +311,19 @@ Clementine.add('wt.controllers', function(exports) {
                 
         el.removeClass('unset');
         el.find('.goal-name').text(userGoal.selectedGoal.name).attr('itemid', userGoal.selectedGoal.id);
-        el.find('.goal-value').text(userGoal.targetValue);
+        el.find('.value-field').attr('placeholder', goal.targetValue);
         el.find('.goal-unit').text(userGoal.selectedUnit.name);
         el.find('[type="button"]').hide();
       
         that.getView('modal-view').dismissModalView();
+        
+        that.goalsCount++;
+                
+        if (that.goalsCount === 4) {
+          that.getElement('update-msg').text('Update Goals');
+        } else {
+          that.getElement('update-msg').text('Set Goals');
+        }
         
       }
       
@@ -354,9 +374,11 @@ Clementine.add('wt.controllers', function(exports) {
       });
       
       if (filled === 4) {
-        this.getElement('update-btn').show();
+        this.getElement('update-btn').fadeIn();
+        this.getElement('update-msg').fadeOut();
       } else {
         this.getElement('update-btn').hide();
+        this.getElement('update-msg').show();
       }
       
     },
@@ -367,7 +389,8 @@ Clementine.add('wt.controllers', function(exports) {
       
       var goalsEl = this.getElement('goal-forms'), that = this;
       
-      this.getElement('update-btn').hide();
+      this.getElement('update-btn').fadeOut();
+      this.getElement('update-msg').fadeIn().text('Goals Updated');
             
       goalsEl.find('.goal-item').each(function() {
         
@@ -546,13 +569,15 @@ Clementine.add('wt.controllers', function(exports) {
             
       if (goal.category.name === 'Custom') {
       
+        this.getElement('goal-label').show();
         this.getElement('custom-field').val('').show();
         this.getElement('custom-unit-field').val('').show();
         this.getElement('unit-field').val('').hide();
         this.getElement('goal-name').val('').hide();
               
       } else {
-            
+      
+        this.getElement('goal-label').hide();
         this.getElement('custom-field').val('').hide();
         this.getElement('custom-unit-field').val('').hide();
         this.getElement('unit-field').val('').show();
