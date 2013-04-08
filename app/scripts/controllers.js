@@ -325,7 +325,7 @@ Clementine.add('wt.controllers', function(exports) {
         var el = goalsEl.find('.goal-item[itemid="' + goal.selectedGoal.category.id + '"]');
                 
         el.removeClass('unset');
-        el.find('.goal-name').text(goal.selectedGoal.displayText).attr('itemid', goal.selectedGoal.id);
+        el.find('.goal-name').text(goal.selectedGoal.displayText).attr('itemid', goal.id);
         el.find('.value-field').attr('placeholder', goal.targetValue);
         el.find('.goal-unit').text(goal.selectedUnit.name);
         
@@ -366,7 +366,7 @@ Clementine.add('wt.controllers', function(exports) {
         var el = that.getElement('goal-forms').find('.goal-item[itemid="' + userGoal.selectedGoal.category.id + '"]');
                 
         el.removeClass('unset');
-        el.find('.goal-name').text(userGoal.selectedGoal.displayText).attr('itemid', userGoal.selectedGoal.id);
+        el.find('.goal-name').text(userGoal.selectedGoal.displayText).attr('itemid', userGoal.id);
         el.find('.value-field').attr('placeholder', goal.targetValue);
         el.find('.goal-unit').text(userGoal.selectedUnit.name);
         el.find('[type="button"]').hide();
@@ -452,7 +452,7 @@ Clementine.add('wt.controllers', function(exports) {
         
         var el = $(this);
                 
-        var goalId = $(this).attr('itemid');
+        var goalId = $(this).find('.goal-name').attr('itemid');
         var value = $(this).find('input').val();
         
         el.addClass('updating').removeClass('error');
