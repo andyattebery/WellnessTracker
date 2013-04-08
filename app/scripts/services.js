@@ -21,12 +21,18 @@ Clementine.add('wt.services', function(exports) {
     
     loginUser: function(email) {
       
-      return this.deferRequest('/User?email=' + encodeURI(email), 'POST', {}, null);
+      return this.deferRequest('/User?email=' + encodeURI(email), 'POST', {}, function(data) {
+        return new User(data);
+      });
       
     },
     
     getCategories: function() {
-      return this.deferRequest('/Category', 'GET', {}, null);
+      return this.deferRequest('/Category', 'GET', {}, function(data) {
+        return _.map(data, function(category) {
+          return new Category(category);
+        });
+      });
     },
     
     getUserGoals: function(userId) {
@@ -35,7 +41,11 @@ Clementine.add('wt.services', function(exports) {
         userId: userId
       };
       
-      return this.deferRequest('/UserGoal', 'GET', params, null);
+      return this.deferRequest('/UserGoal', 'GET', params, function(data) {
+        return _.map(data, function(userGoal) {
+          return new UserGoal(userGoal);
+        });
+      });
         
     },
     
@@ -45,7 +55,11 @@ Clementine.add('wt.services', function(exports) {
         categoryId: categoryId
       };
       
-      return this.deferRequest('/Goal', 'GET', params, null);
+      return this.deferRequest('/Goal', 'GET', params, function(data) {
+        return _.map(data, function(goal) {
+          return new Goal(goal);
+        });
+      });
     
     },
     
@@ -58,7 +72,9 @@ Clementine.add('wt.services', function(exports) {
         TargetValue: targetValue
       };
       
-      return this.deferRequest('/UserGoal', 'POST', params, null);
+      return this.deferRequest('/UserGoal', 'POST', params, function(data) {
+        return new UserGoal(data);
+      });
     
     },
     
@@ -72,7 +88,9 @@ Clementine.add('wt.services', function(exports) {
         CustomUnit: customUnit
       };
       
-      return this.deferRequest('/UserGoal', 'POST', params, null);
+      return this.deferRequest('/UserGoal', 'POST', params, function(data) {
+        return new UserGoal(data);
+      });
       
     },
     

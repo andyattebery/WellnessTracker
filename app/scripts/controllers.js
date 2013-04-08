@@ -114,6 +114,7 @@ Clementine.add('wt.controllers', function(exports) {
       }
     
       this.service.loginUser(email).then(function(user) {
+        console.log(user);
         localStorage.setItem('wellness_uid', user.id);
         that.fire('login', user.id);        
       }, function() {
@@ -160,6 +161,7 @@ Clementine.add('wt.controllers', function(exports) {
       var that = this;
                 
       this.categoriesRequest = this.service.getCategories().then(function(categories) {
+        console.log(categories);
         that.renderCategories(categories);
       }, function() {
         ErrorHandler.show('Could not load categories');
