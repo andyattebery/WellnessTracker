@@ -161,7 +161,6 @@ Clementine.add('wt.controllers', function(exports) {
       var that = this;
                 
       this.categoriesRequest = this.service.getCategories().then(function(categories) {
-        console.log(categories);
         that.renderCategories(categories);
       }, function() {
         ErrorHandler.show('Could not load categories');
