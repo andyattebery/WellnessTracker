@@ -206,7 +206,10 @@ ul {
 }
 
 .goal-item .value-field {
-  margin: 0 auto;
+  bottom: 16px;
+  left: 50%;
+  margin: 0 0 0 -56px;
+  position: absolute;
   width: 100px;
 }
 
