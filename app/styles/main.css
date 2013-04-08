@@ -55,7 +55,7 @@ ul {
 #logo {
   background: url(../images/logo@2x.png) center center no-repeat;
   height: 160px;
-  margin: 20px auto;
+  margin: 10px auto;
   width: 300px;
   -webkit-background-size: 300px 160px;
   -moz-background-size: 300px 160px;
@@ -342,7 +342,7 @@ li.goal-list-item:active + li, li.goal-list-item:active {
 
 /* scrolling */
 
-#goal-forms, ul.list {
+#goal-forms, ul.list, .view.login {
   overflow-x: hidden;
   overflow-y: auto;
   position: absolute;
