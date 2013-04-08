@@ -588,7 +588,7 @@ Clementine.add('wt.controllers', function(exports) {
         this.getElement('custom-field').val('').hide();
         this.getElement('custom-unit-field').val('').hide();
         this.getElement('unit-field').val('').show();
-        this.getElement('goal-name').text(goal.name).show();
+        this.getElement('goal-name').text(goal.name + ' Goal').show();
       
         unitField.empty();
         
