@@ -1,27 +1,5 @@
 Clementine.add('wt.models', function(exports) {
 
-  var WellnessViewModel = Class.extend({
-  
-    initialize: function(service) {
-    
-      this.service = service;
-    
-    },
-    
-    load: function() {
-    
-      // if has local storage item
-      
-      // get user goals
-      
-      // success -> push view
-      
-      // fail -> login screen
-    
-    }
-  
-  });
-  
   var LoginViewModel = Class.extend({
   
     initialize: function(service) {
@@ -30,11 +8,11 @@ Clementine.add('wt.models', function(exports) {
     
     },
     
-    login: function(email) {
-    
-      // login user
-      
-      // return User object
+    loginUser: function(email) {
+          
+      return this.service.loginUser(email).done(function(user) {
+        localStorage.setItem('wellness_uid', user.id);
+      });
       
     }
   
@@ -45,42 +23,51 @@ Clementine.add('wt.models', function(exports) {
     initialize: function(service) {
     
       this.service = service;
+      
+      this.categoryRequest = this.service.getCategories();
     
     },
     
-    load: function(goals) {
-    
-      // validate goals
+    getUserGoals: function(userId) {
+            
+      this.userId = userId;
       
-      // fetch goals for unset categories
+      return this.service.getUserGoals(userId);
+      
+    },
     
+    getCategories: function() {
+      
+      return this.service.getCategories();
+      
     },
     
     getGoalsForCategory: function(categoryId) {
+          
+      return this.service.getGoalsForCategory(categoryId);
+          
+    },
     
-      // wait for load
+    saveGoal: function(categoryId, goalId, unitId, targetValue) {
       
-      // return goals list
+      return this.service.saveGoal(this.userId, categoryId, goalId, unitId, targetValue);
     
     },
     
-    setUserGoal: function(goalId) {
-    
-      // login user
+    saveCustomGoal: function(categoryId, goalId, targetValue, customName, customUnit) {
       
-      // return User object
+      return this.service.saveCustomGoal(this.userId, categoryId, goalId, targetValue, customName, customUnit);
       
     },
     
-    updateGoals: function(goals) {
+    updateGoal: function(goalId, currentValue) {
       
-      // run update of all four goal categories
+      return this.service.setGoalProgress(this.userId, goalId, currentValue);
       
     }
   
   });
 
-  exports.WellnessViewModel = WellnessViewModel;
   exports.LoginViewModel    = LoginViewModel;
   exports.GoalsViewModel    = GoalsViewModel;
 

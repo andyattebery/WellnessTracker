@@ -32,7 +32,7 @@ Clementine.add('wt.objects', function(exports) {
    * ex. less/more/equal
    */
   function Target(data) {
-  
+    
     if (!data) {
       throw 'Invalid data for Target';
     }
@@ -65,10 +65,11 @@ Clementine.add('wt.objects', function(exports) {
       throw 'Invalid data for Goal';
     }
   
-    this.id    = data.Id;
-    this.name  = data.Name;
+    this.id = data.Id;
+    this.name = data.Name;
     this.category = new Category(data.Category);
     this.target = new Target(data.Target);
+    this.sortField = this.target.name;
     this.validUnits = _.map(data.ValidUnits, function(validUnit) {
       return new Unit(validUnit);
     });
@@ -85,7 +86,6 @@ Clementine.add('wt.objects', function(exports) {
     }
   
     this.id = data.Id;
-    this.user = new User(data.User);
     this.selectedGoal = new Goal(data.SelectedGoal);
     this.selectedUnit = new Unit(data.SelectedUnit);
     this.targetValue = data.TargetValue;
