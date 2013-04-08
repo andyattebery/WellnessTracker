@@ -251,9 +251,9 @@ div, span, li, ul {
 /* goal items */
 
 .goal-item {
-  background: #EEE;
+  background: #FFF;
   padding: 10px;
-  margin: 5%;
+  margin: 5% 0 5% 0;
   box-sizing: border-box;
   float: left;
   min-height: 160px;
@@ -366,6 +366,7 @@ div, span, li, ul {
 /* goals view */
 
 .view.goals {
+  background: #EEE;
   overflow-x: hidden;
   overflow-y: scroll;
   width: 100%;
@@ -375,7 +376,8 @@ div, span, li, ul {
 /* header toolbar */
 
 .header-toolbar {
-  background: #DDD;
+  background: #303D4A;
+  color: #FFF;
   height: 44px;
   width: 100%;
 }
