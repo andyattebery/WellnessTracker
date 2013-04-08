@@ -16,103 +16,40 @@ Clementine.add('wt.services', function(exports) {
     },
     
     getPrefix: function() {
-      return '';
+      return '/api';
     },
     
     loginUser: function(email) {
             
-      var deferred = jQuery.Deferred();
+      var params = {
+        email: email
+      };
       
-      deferred.resolve(new User({
-        Id: 1,
-        Email: 'kevin.kinnebrew@gmail.com'
-      }));
-      
-      return deferred;
+      return this.deferRequest('/User', 'POST', params, null);
       
     },
     
     getCategories: function() {
-    
-      // returns [Categories]
-      
-      var deferred = jQuery.Deferred();
-      
-      deferred.resolve([new Category({
-        Id: 1,
-        Name: 'Fitness'
-      }),
-      new Category({
-        Id: 2,
-        Name: 'Nutrition'
-      }),
-      new Category({
-        Id: 3,
-        Name: 'Wellness'
-      }),
-      new Category({
-        Id: 4,
-        Name: 'Custom'
-      })]);
-      
-      return deferred;
-    
+      return this.deferRequest('/Category', 'GET', {}, null);
     },
     
     getUserGoals: function(userId) {
     
-      // return [UserGoals] 4
+      var params = {
+        userId: userId
+      };
       
-      var deferred = jQuery.Deferred();
-      
-      //deferred.resolve([]);
-      
-      deferred.resolve([
-        new UserGoal({
-          Id: 1,
-          SelectedGoal: { Id: 1, Name: 'Weight', DisplayText: 'Weight Lost', Category: { Id: 1, Name: 'Fitness' }, Target: { Id: 1, Name: 'less' }, ValidUnits: [] },
-          SelectedUnit: { Id: 1, Name: 'Pounds' },
-          TargetValue: 20
-        }),
-        new UserGoal({
-          Id: 2,
-          SelectedGoal: { Id: 1, Name: 'Fiber', DisplayText: 'Fiber Eaten', Category: { Id: 2, Name: 'Nutrition' }, Target: { Id: 2, Name: 'more' }, ValidUnits: [] },
-          SelectedUnit: { Id: 1, Name: 'Grams' },
-          TargetValue: 50
-        })
-      ]);
-      
-      return deferred;
-    
+      return this.deferRequest('/UserGoal', 'GET', params, null);
+        
     },
     
     getGoalsForCategory: function(categoryId) {
-    
-      // return [Goals]
       
-      var deferred = jQuery.Deferred();
+      var params = {
+        categoryId: categoryId
+      };
       
-      if (categoryId == 3) {
-        
-        deferred.resolve([
-          new Goal({ Id: 1, Name: 'Running', Category: { Id: 3, Name: 'Wellness' }, Target: { Id: 1, Name: 'less' }, ValidUnits: [{ Id: 1, Name: 'Day' },  { Id: 2, Name: 'Pounds' }] }),
-          new Goal({ Id: 2, Name: 'Walking', Category: { Id: 3, Name: 'Wellness' }, Target: { Id: 2, Name: 'more' }, ValidUnits: [{ Id: 1, Name: 'Day' },  { Id: 2, Name: 'Pounds' }] }),
-          new Goal({ Id: 3, Name: 'Jumping', Category: { Id: 3, Name: 'Wellness' }, Target: { Id: 2, Name: 'more' }, ValidUnits: [{ Id: 1, Name: 'Day' },  { Id: 2, Name: 'Pounds' }] }),
-          new Goal({ Id: 4, Name: 'Eating', Category: { Id: 3, Name: 'Wellness' }, Target: { Id: 2, Name: 'less' }, ValidUnits: [{ Id: 1, Name: 'Day' },  { Id: 2, Name: 'Pounds' }] }),
-          new Goal({ Id: 5, Name: 'Sleeping', Category: { Id: 3, Name: 'Wellness' }, Target: { Id: 2, Name: 'more' }, ValidUnits: [{ Id: 1, Name: 'Day' },  { Id: 2, Name: 'Pounds' }] })
-        ]);
-        
-      } else {
-      
-        deferred.resolve([
-          new Goal({ Id: 1, Name: 'Less', Category: { Id: 4, Name: 'Custom' }, Target: { Id: 1, Name: 'less' }, ValidUnits: [] }),
-          new Goal({ Id: 2, Name: 'More', Category: { Id: 4, Name: 'Custom' }, Target: { Id: 2, Name: 'more' }, ValidUnits: [] }),
-          new Goal({ Id: 3, Name: 'Target', Category: { Id: 4, Name: 'Custom' }, Target: { Id: 2, Name: 'more' }, ValidUnits: [] })
-        ]);
-      
-      }
-      
-      return deferred;
+      return this.deferRequest('/Goal', 'GET', params, null);
     
     },
     
@@ -124,19 +61,8 @@ Clementine.add('wt.services', function(exports) {
         UnitId: unitId,
         TargetValue: targetValue
       };
-            
-      // return UserGoal
       
-      var deferred = jQuery.Deferred();
-      
-      deferred.resolve(new UserGoal({
-        Id: 1,
-        SelectedGoal: { Id: 1, Name: 'Weight', DisplayText: 'Lost', Category: { Id: 3, Name: 'Fitness' }, Target: { Id: 1, Name: 'less' }, ValidUnits: [] },
-        SelectedUnit: { Id: 1, Name: 'Pounds' },
-        TargetValue: 12
-      }));
-      
-      return deferred;
+      return this.deferRequest('/UserGoal', 'POST', params, null);
     
     },
     
@@ -149,20 +75,8 @@ Clementine.add('wt.services', function(exports) {
         CustomName: customName,
         CustomUnit: customUnit
       };
-            
-      // return UserGoal
       
-      var deferred = jQuery.Deferred();
-      
-      deferred.resolve(new UserGoal({
-        Id: 1,
-        SelectedGoal: { Id: 1, Name: 'Weight', DisplayText: '', Category: { Id: 4, Name: 'Custom' }, Target: { Id: 1, Name: 'less' }, ValidUnits: [] },
-        SelectedUnit: { Id: 1, Name: 'My Custom Unit' },
-        TargetValue: 45,
-        CustomName: 'My Custom Goal'
-      }));
-      
-      return deferred;
+      return this.deferRequest('/UserGoal', 'POST', params, null);
       
     },
     
@@ -174,13 +88,7 @@ Clementine.add('wt.services', function(exports) {
         CurrentValue: currentValue
       };
       
-      var deferred = jQuery.Deferred();
-      
-      setTimeout(function() {
-        deferred.resolve();
-      }, 1000);
-      
-      return deferred;
+      return this.deferRequest('/TrackingEntry', 'POST', params, null);
             
     }
   

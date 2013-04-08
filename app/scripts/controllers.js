@@ -29,13 +29,12 @@ Clementine.add('wt.controllers', function(exports) {
     
     // Event Listeners
     
-    onLogin: function(e) {
-      
+    onLogin: function(e) {      
       e.stopPropagation();
-            
-      this.getView('goals').setUserId(e.data);
-      this.pushView('goals');
-      
+      var that = this;
+      this.getView('goals').setUserId(e.data).then(function() {
+        that.pushView('goals');
+      });      
     },
     
     onLogout: function(e) {
@@ -205,7 +204,7 @@ Clementine.add('wt.controllers', function(exports) {
       this.userId = userId;
       var goalsRequest = this.service.getUserGoals(userId);
       
-      $.when(goalsRequest, this.categoriesRequest).then(function(goals) {
+      return $.when(goalsRequest, this.categoriesRequest).then(function(goals) {
         setTimeout(function() {
           that.renderGoals(goals);
         }, 0);

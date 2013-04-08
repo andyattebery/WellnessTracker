@@ -1437,7 +1437,7 @@ String.prototype.trim = function() {
     
     deferRequest: function(path, method, params, map) {
       
-      var deferred = Q.defer();
+      var deferred = jQuery.Deferred();
       
       map = map || function(data) {
         return data;
@@ -1476,7 +1476,7 @@ String.prototype.trim = function() {
         }
       });
       
-      return deferred.promise;
+      return deferred;
       
     },
     

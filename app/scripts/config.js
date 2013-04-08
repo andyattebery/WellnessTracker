@@ -8,11 +8,9 @@ Clementine.config({
   name: 'wellness',
   paths: {
     DEV: 'http://localhost:8000',
-    STAGE: 'http://localhost:8000',
-    QA: 'http://localhost:8000',
-    PROD: 'http://localhost:8000'
+    PROD: 'http://fitnesschallengetrackerapi.azurewebsites.net'
   },
-  env: 'DEV',
+  env: 'PROD',
   services: ['wt'],
   views: ['login.html', 'goals.html', 'goal-setup.html'],
   required: ['wt.objects', 'wt.services', 'wt.controllers']
