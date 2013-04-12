@@ -7,10 +7,10 @@
 Clementine.config({
   name: 'wellness',
   paths: {
-    DEV: 'http://localhost:8000',
+    DEV: 'http://localhost:3860',
     PROD: 'http://fitnesschallengetrackerapi.azurewebsites.net'
   },
-  env: 'PROD',
+  env: 'DEV',
   services: ['wt'],
   views: ['login.html', 'goals.html', 'goal-setup.html'],
   required: ['wt.objects', 'wt.services', 'wt.controllers']
