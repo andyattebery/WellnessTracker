@@ -7,7 +7,7 @@
 Clementine.config({
   name: 'wellness',
   paths: {
-    DEV: 'http://localhost:3860',
+    DEV: 'http://localhost:8000',
     PROD: 'http://fitnesschallengetrackerapi.azurewebsites.net'
   },
   env: 'PROD',
