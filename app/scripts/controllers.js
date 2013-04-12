@@ -301,7 +301,7 @@ Clementine.add('wt.controllers', function(exports) {
         container.append('<span class="goal-value hidden"></span>');
         el.append(container);
         el.append('<input type="number" class="value-field" name="value" />');
-        el.append('<input type="button" class="set-goal-btn btn set" value="Set Goal" />');
+        el.append('<input type="button" class="set-goal-btn btn set" value="Set Weekly Goal" />');
         
         goals.append(el);
         
