@@ -84,7 +84,7 @@ Clementine.add('wt.services', function(exports) {
         UserId: userId,
         GoalId: goalId,
         TargetValue: targetValue,
-        CustomName: customName,
+        CustomGoal: customName,
         CustomUnit: customUnit
       };
       
